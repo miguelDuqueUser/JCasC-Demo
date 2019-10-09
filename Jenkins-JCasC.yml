@@ -1,0 +1,31 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code Plugin\n\n"
+  numExecutors: 5
+  scmCheckoutRetryCount: 2
+  mode: NORMAL
+  securityRealm:
+    ldap:
+      configurations:
+        - server: ldap.acme.com
+          rootDN: dc=acme,dc=fr
+          managerPasswordSecret: test
+      cache:
+        size: 100
+        ttl: 10
+      userIdStrategy: CaseSensitive
+      groupIdStrategy: CaseSensitive
+credentials:
+  system:
+    domainCredentials:
+      - domain :
+          name: "test.com"
+          description: "test.com domain"
+          specifications:
+            - hostnameSpecification:
+                includes: "*.test.com"
+        credentials:
+          - usernamePassword:
+              scope:    SYSTEM
+              id:       sudo_password
+              username: root
+              password: root
